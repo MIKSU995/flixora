@@ -23,6 +23,20 @@
     <link rel="stylesheet" href="{{ asset('css/flixora.css') }}">
     @yield('styles')
 </head>
+<script>
+function openTrailer(url, title, mediaId) {
+
+    fetch('/history/add/' + mediaId, {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        }
+    }).catch(err => console.error(err));
+
+    window.open(url, '_blank');
+}
+</script>
 <body>
 
     <!-- Navigation Header -->

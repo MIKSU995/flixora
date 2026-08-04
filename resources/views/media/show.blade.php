@@ -49,10 +49,11 @@
 
                 <div class="media-detail-actions">
                     @if($media->trailer_url)
-                        <button onclick="openTrailer('{{ $media->trailer_url }}', '{{ $media->title }}')" class="btn-primary">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                            Tonton Trailer
-                        </button>
+                        <button
+                        onclick="openTrailer('{{ $featuredMedia->trailer_url }}', '{{ $featuredMedia->title }}', {{ $featuredMedia->id }})"
+                        class="btn-secondary">
+                        Tonton Trailer
+                    </button>
                     @endif
 
                     <button onclick="markAsWatched({{ json_encode(['id' => $media->id, 'title' => $media->title, 'slug' => $media->slug, 'poster_url' => $media->poster_url, 'type' => $media->type, 'release_year' => $media->release_year, 'avg_rating' => $media->avg_rating, 'genres' => $media->genres->toArray()]) }})" class="btn-secondary">
