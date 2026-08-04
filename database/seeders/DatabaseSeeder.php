@@ -178,16 +178,20 @@ class DatabaseSeeder extends Seeder
 
             // Add Ratings
             foreach ($ratings as $idx => $val) {
-                Rating::create([
-                    'media_id' => $media->id,
-                    'user_identifier' => 'seed_guest_' . $media->id . '_' . $idx,
-                    'rating' => $val,
-                ]);
-            }
+            Rating::firstOrCreate(
+            [
+            'media_id' => $media->id,
+            'user_identifier' => 'seed_guest_' . $media->id . '_' . $idx,
+        ],
+        [
+            'rating' => $val,
+        ]
+    );
+}
 
             // Add Comments
             foreach ($comments as $c) {
-                Comment::create([
+                Comment::firstOrCreate([
                     'media_id' => $media->id,
                     'user_name' => $c['user_name'],
                     'comment_text' => $c['comment_text'],
