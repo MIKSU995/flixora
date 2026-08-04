@@ -19,6 +19,7 @@ Route::get('/media/{slug}', [MediaController::class, 'show'])->name('media.show'
 Route::post('/media/{id}/rate', [MediaController::class, 'rate'])->name('media.rate');
 Route::post('/media/{id}/comment', [MediaController::class, 'comment'])->name('media.comment');
 Route::get('/watch-history', [WatchHistoryController::class, 'index'])->name('history');
+Route::post('/history/add/{id}', [WatchHistoryController::class, 'store'])->name('history.store');
 
 /*
 |--------------------------------------------------------------------------
