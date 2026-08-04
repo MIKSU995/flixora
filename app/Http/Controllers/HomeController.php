@@ -9,55 +9,13 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index(Request $request)
-    {
-        $selectedType = $request->query('type'); // 'movie', 'tv_show', or null
-        $selectedGenreSlug = $request->query('genre');
-        $searchQuery = $request->query('q');
-
-        // Base Query
-       dd(config('database.connections.mysql.database'));
-
-        if ($selectedType && in_array($selectedType, ['movie', 'tv_show'])) {
-            $query->where('type', $selectedType);
-        }
-
-        if ($selectedGenreSlug) {
-            $query->whereHas('genres', function ($q) use ($selectedGenreSlug) {
-                $q->where('slug', $selectedGenreSlug);
-            });
-        }
-
-        if ($searchQuery) {
-            $query->where(function ($q) use ($searchQuery) {
-                $q->where('title', 'like', "%{$searchQuery}%")
-                  ->orWhere('description', 'like', "%{$searchQuery}%")
-                  ->orWhere('director', 'like', "%{$searchQuery}%")
-                  ->orWhere('cast', 'like', "%{$searchQuery}%");
-            });
-        }
-
-        // Hero Featured Movie/TV Show
-        $featuredMedia = Media::with('genres')->orderBy('avg_rating', 'desc')->first();
-
-        // Top Rated Media
-        $topRatedMedia = Media::with('genres')->orderBy('avg_rating', 'desc')->take(4)->get();
-
-        // Main Catalog Items
-        $catalogMedia = $query->orderBy('created_at', 'desc')->paginate(12)->withQueryString();
-        
-        // Master Genres for navigation
-        $allGenres = Genre::orderBy('name', 'asc')->get();
-
-        dd($catalogMedia->count(), $catalogMedia);
-
-        return view('home', compact(
-            'featuredMedia',
-            'topRatedMedia',
-            'catalogMedia',
-            'allGenres',
-            'selectedType',
-            'selectedGenreSlug',
-            'searchQuery'
-        ));
-    }
+{
+    dd([
+        'connection' => config('database.default'),
+        'host'       => env('DB_HOST'),
+        'database'   => env('DB_DATABASE'),
+        'username'   => env('DB_USERNAME'),
+        'port'       => env('DB_PORT'),
+    ]);
+}
 }
