@@ -49,8 +49,7 @@
 
                 <div class="media-detail-actions">
                     @if($media->trailer_url)
-                        <button onclick="openTrailer('{{ $media->trailer_url }}', '{{ $media->title }}')" class="btn-primary">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                        <button onclick="openTrailer('{{ $featuredMedia->trailer_url }}', '{{ $featuredMedia->title }}', {{ $featuredMedia->id }})" class="btn-secondary">
                             Tonton Trailer
                         </button>
                     @endif

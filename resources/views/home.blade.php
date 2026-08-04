@@ -37,7 +37,7 @@
                             Lihat Detail
                         </a>
                         @if($featuredMedia->trailer_url)
-                            <button onclick="openTrailer('{{ $featuredMedia->trailer_url }}', '{{ $featuredMedia->title }}')" class="btn-secondary">
+                            <button onclick="openTrailer('{{ $featuredMedia->trailer_url }}', '{{ $featuredMedia->title }}', {{ $featuredMedia->id }})" class="btn-secondary">
                                 Tonton Trailer
                             </button>
                         @endif
