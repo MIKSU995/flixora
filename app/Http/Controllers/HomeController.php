@@ -10,19 +10,17 @@ use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     public function index()
-    {
-        try {
-            DB::connection()->getPdo();
+{
+    try {
 
-            dd([
-                'status' => 'CONNECTED',
-                'tables' => DB::select('SHOW TABLES'),
-            ]);
-        } catch (\Exception $e) {
-            dd([
-                'status' => 'FAILED',
-                'error' => $e->getMessage(),
-            ]);
-        }
+        $media = Media::latest()->take(6)->get();
+
+        dd($media);
+
+    } catch (\Exception $e) {
+
+        dd($e->getMessage());
+
     }
+}
 }
