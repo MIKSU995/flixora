@@ -50,7 +50,8 @@
                 <div class="media-detail-actions">
                     @if($media->trailer_url)
                         <button
-                        onclick="openTrailer('{{ $media->trailer_url }}',{{ $media->title }}, {{ $media->id }})">
+                        onclick="openTrailer('{{ $media->trailer_url }}','{{ $media->title }}',{{ $media->id }})"
+                        class="btn-secondary">
                         Tonton Trailer
                     </button>
                     @endif
