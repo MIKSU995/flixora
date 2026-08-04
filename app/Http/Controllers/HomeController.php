@@ -8,14 +8,20 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(Request $request)
+    public function index()
 {
-    dd([
-        'connection' => config('database.default'),
-        'host'       => env('DB_HOST'),
-        'database'   => env('DB_DATABASE'),
-        'username'   => env('DB_USERNAME'),
-        'port'       => env('DB_PORT'),
-    ]);
+    try {
+        DB::connection()->getPdo();
+
+        dd([
+            'status' => 'CONNECTED',
+            'tables' => DB::select('SHOW TABLES'),
+        ]);
+    } catch (\Exception $e) {
+        dd([
+            'status' => 'FAILED',
+            'error' => $e->getMessage(),
+        ]);
+    }
 }
 }
