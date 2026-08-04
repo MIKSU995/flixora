@@ -145,12 +145,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const trailerModal = document.getElementById('trailerModal');
     const trailerFrame = document.getElementById('trailerIframe');
     
-    window.openTrailer = function (videoUrl, title) {
-        if (!trailerModal || !trailerFrame) return;
-        trailerFrame.src = videoUrl + '?autoplay=1';
-        document.getElementById('trailerModalTitle').innerText = title;
-        trailerModal.classList.add('show');
-    };
+    window.openTrailer = function (videoUrl, mediaData) {
+
+    // Simpan otomatis ke Riwayat Ditonton
+    markAsWatched(mediaData);
+
+    if (!trailerModal || !trailerFrame) return;
+
+    trailerFrame.src = videoUrl + '?autoplay=1';
+
+    document.getElementById('trailerModalTitle').innerText = mediaData.title;
+
+    trailerModal.classList.add('show');
+};
 
     window.closeTrailer = function () {
         if (!trailerModal || !trailerFrame) return;

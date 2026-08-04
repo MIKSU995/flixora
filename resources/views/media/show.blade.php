@@ -49,16 +49,24 @@
 
                 <div class="media-detail-actions">
                     @if($media->trailer_url)
-                        <button
-                        onclick="openTrailer('{{ $media->trailer_url }}','{{ $media->title }}',{{ $media->id }})"
+                    <button
+                        onclick='openTrailer(
+                            "{{ $media->trailer_url }}",
+                            {!! json_encode([
+                                "id" => $media->id,
+                                "title" => $media->title,
+                                "slug" => $media->slug,
+                                "poster_url" => $media->poster_url,
+                                "type" => $media->type,
+                                "release_year" => $media->release_year,
+                                "avg_rating" => $media->avg_rating,
+                                "genres" => $media->genres->toArray()
+                            ]) !!}
+                        )'
                         class="btn-secondary">
                         Tonton Trailer
                     </button>
-                    @endif
-
-                    <button onclick="markAsWatched({{ json_encode(['id' => $media->id, 'title' => $media->title, 'slug' => $media->slug, 'poster_url' => $media->poster_url, 'type' => $media->type, 'release_year' => $media->release_year, 'avg_rating' => $media->avg_rating, 'genres' => $media->genres->toArray()]) }})" class="btn-secondary">
-                        Tambah ke Riwayat
-                    </button>
+                @endif
 
                     <button onclick="toggleFavorite({{ json_encode(['id' => $media->id, 'title' => $media->title, 'slug' => $media->slug, 'poster_url' => $media->poster_url, 'type' => $media->type, 'release_year' => $media->release_year, 'avg_rating' => $media->avg_rating]) }}, this)" class="btn-secondary" id="favBtn">
                         Tambah Favorit
