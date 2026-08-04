@@ -44,3 +44,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/comments/{id}', [AdminMediaController::class, 'deleteComment'])->name('comments.destroy');
     });
 });
+
+Route::get('/debug-url', function () {
+    return response()->json([
+        'app_url' => config('app.url'),
+        'asset' => asset('css/flixora.css'),
+        'route' => route('home'),
+        'url' => url('/'),
+        'secure' => request()->isSecure(),
+        'scheme' => request()->getScheme(),
+        'host' => request()->getHost(),
+        'env' => app()->environment(),
+    ]);
+});
