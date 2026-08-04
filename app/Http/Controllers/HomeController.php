@@ -11,9 +11,7 @@ class HomeController extends Controller
 {
    public function index(Request $request)
 {
-    dd($request->all());
-    
-    $searchQuery = $request->search;
+    $searchQuery = $request->query('q');
     $selectedGenreSlug = $request->genre;
     $selectedType = $request->type;
 
