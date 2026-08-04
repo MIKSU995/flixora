@@ -9,18 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    public function index()
+   public function index()
 {
-    try {
+    $featured = Media::orderByDesc('avg_rating')->take(5)->get();
 
-        $media = Media::latest()->take(6)->get();
+    $latest = Media::latest()->take(12)->get();
 
-        dd($media);
-
-    } catch (\Exception $e) {
-
-        dd($e->getMessage());
-
-    }
+    return view('home', compact('featured', 'latest'));
 }
 }
