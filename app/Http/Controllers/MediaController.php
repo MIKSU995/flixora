@@ -7,6 +7,7 @@ use App\Models\Rating;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Events\RatingUpdated;
 
 class MediaController extends Controller
 {
