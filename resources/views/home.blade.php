@@ -61,7 +61,9 @@
                     <a href="{{ route('media.show', $recItem->slug) }}" class="media-card">
                         <div class="card-poster-wrapper">
                             <img src="{{ $recItem->poster_url }}" alt="{{ $recItem->title }}" class="card-poster-img" loading="lazy">
-                           <div class="rating-badge" data-media-id="{{ $item->id }}">{{ number_format($recItem->avg_rating, 1) }} </div>
+                           <div class="rating-badge" data-media-id="{{ $recItem->id }}">
+                           {{ number_format($recItem->avg_rating, 1) }}
+                        </div>
                         </div>
                         <div class="card-content">
                             <h3 class="card-title">{{ $recItem->title }}</h3>
@@ -107,7 +109,9 @@
                 <a href="{{ route('media.show', $item->slug) }}" class="media-card">
                     <div class="card-poster-wrapper">
                         <img src="{{ $item->poster_url }}" alt="{{ $item->title }}" class="card-poster-img" loading="lazy">
-                       <div class="rating-badge" data-media-id="{{ $recItem->id }}"> {{ number_format($recItem->avg_rating,1) }} </div>
+                       <div class="rating-badge" data-media-id="{{ $item->id }}">
+                            {{ number_format($item->avg_rating,1) }}
+                       </div>
                         <h3 class="card-title">{{ $item->title }}</h3>
                         <div class="card-meta">
                             <span>{{ $item->release_year }}</span> &bull;
