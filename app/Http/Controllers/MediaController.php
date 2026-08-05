@@ -65,6 +65,8 @@ class MediaController extends Controller
         // Recalculate average rating & count
         $media->updateAverageRating();
 
+        broadcast(new RatingUpdated($media))->toOthers();
+
         return response()->json([
             'success' => true,
             'message' => 'Terima kasih atas rating yang Anda berikan!',

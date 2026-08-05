@@ -42,9 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(data => {
     if (data.success) {
 
+        // Update rating user
         starContainer.dataset.userRating = data.user_rating;
         highlightStars(data.user_rating);
 
+        // Update angka rating di halaman detail
         if (currentRatingDisplay) {
             currentRatingDisplay.innerText = data.avg_rating;
         }
@@ -53,24 +55,23 @@ document.addEventListener('DOMContentLoaded', () => {
             totalRatingDisplay.innerText = data.total_ratings;
         }
 
-        const badge = document.querySelector('.badge-gold');
-        if (badge) {
-            badge.innerHTML = `
-                <span id="avgRatingValue">${data.avg_rating}</span> / 5.0
-                (<span id="totalRatingCount">${data.total_ratings}</span> ulasan)
-            `;
-        }
+        // Update badge rating
+        const avg = document.getElementById("avgRatingValue");
+        const total = document.getElementById("totalRatingCount");
 
-        document.querySelectorAll('.rating-badge').forEach(function(el){
-            if(el.dataset.mediaId == mediaId){
-                el.innerText = data.avg_rating;
-            }
-        });
+        if(avg) avg.innerText = data.avg_rating;
+        if(total) total.innerText = data.total_ratings;
 
-        showToast(data.message, 'success');
+        // Simpan rating terbaru ke localStorage
+        localStorage.setItem("rating_" + mediaId, JSON.stringify({
+            avg_rating: data.avg_rating,
+            total_ratings: data.total_ratings
+        }));
+
+        showToast(data.message, "success");
 
     } else {
-        showToast('Gagal mengirim rating.', 'danger');
+        showToast("Gagal mengirim rating.", "danger");
     }
 })
                 .catch(err => {
@@ -316,3 +317,29 @@ function updateThemeUI(theme) {
         updateThemeUI(saved);
     });
 })();
+
+// ================================
+// Auto Update Rating Card
+// ================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    document.querySelectorAll(".rating-badge").forEach(function(card){
+
+        const mediaId = card.dataset.mediaId;
+
+        if(!mediaId) return;
+
+        const data = localStorage.getItem("rating_" + mediaId);
+
+        if(data){
+
+            const rating = JSON.parse(data);
+
+            card.innerText = rating.avg_rating;
+
+        }
+
+    });
+
+});
