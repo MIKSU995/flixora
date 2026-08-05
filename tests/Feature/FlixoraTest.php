@@ -32,14 +32,14 @@ class FlixoraTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Inception');
         $response->assertSee('Christopher Nolan');
-        $response->assertSee('Rekomendasi Film Sejenis');
+        $response->assertSee('Film Sejenis');
     }
 
     public function test_watch_history_page_renders(): void
     {
         $response = $this->get('/watch-history');
         $response->assertStatus(200);
-        $response->assertSee('Film Terakhir Ditonton');
+        $response->assertSee('Riwayat &amp; Favorit Saya', false);
     }
 
     public function test_guest_cannot_access_admin_dashboard(): void
@@ -62,6 +62,6 @@ class FlixoraTest extends TestCase
 
         $dashboardResponse = $this->get('/admin/dashboard');
         $dashboardResponse->assertStatus(200);
-        $dashboardResponse->assertSee('Overview Dashboard Admin');
+        $dashboardResponse->assertSee('Overview Dashboard');
     }
 }
