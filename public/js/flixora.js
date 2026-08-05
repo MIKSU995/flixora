@@ -40,16 +40,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .then(res => res.json())
                 .then(data => {
-                    if (data.success) {
-                        starContainer.dataset.userRating = data.user_rating;
-                        highlightStars(data.user_rating);
-                        if (currentRatingDisplay) currentRatingDisplay.innerText = data.avg_rating;
-                        if (totalRatingDisplay) totalRatingDisplay.innerText = data.total_ratings;
-                        showToast(data.message, 'success');
-                    } else {
-                        showToast('Gagal mengirim rating.', 'danger');
-                    }
-                })
+    if (data.success) {
+
+        starContainer.dataset.userRating = data.user_rating;
+        highlightStars(data.user_rating);
+
+        if (currentRatingDisplay) {
+            currentRatingDisplay.innerText = data.avg_rating;
+        }
+
+        if (totalRatingDisplay) {
+            totalRatingDisplay.innerText = data.total_ratings;
+        }
+
+        const badge = document.querySelector('.badge-gold');
+        if (badge) {
+            badge.innerHTML = `
+                <span id="avgRatingValue">${data.avg_rating}</span> / 5.0
+                (<span id="totalRatingCount">${data.total_ratings}</span> ulasan)
+            `;
+        }
+
+        document.querySelectorAll('.rating-badge').forEach(function(el){
+            if(el.dataset.mediaId == mediaId){
+                el.innerText = data.avg_rating;
+            }
+        });
+
+        showToast(data.message, 'success');
+
+    } else {
+        showToast('Gagal mengirim rating.', 'danger');
+    }
+})
                 .catch(err => {
                     console.error(err);
                     showToast('Terjadi kesalahan koneksi.', 'danger');

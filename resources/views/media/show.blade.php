@@ -162,7 +162,8 @@
                 <a href="{{ route('media.show', $rec->slug) }}" class="media-card">
                     <div class="card-poster-wrapper">
                         <img src="{{ $rec->poster_url }}" alt="{{ $rec->title }}" class="card-poster-img" loading="lazy">
-                        <div class="rating-badge">{{ number_format($rec->avg_rating, 1) }}</div>
+                        <div class="rating-badge" data-media-id="{{ $rec->id }}"> {{ number_format($rec->avg_rating, 1) }}
+                        </div>
                     </div>
                     <div class="card-content">
                         <h3 class="card-title">{{ $rec->title }}</h3>
