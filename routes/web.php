@@ -22,7 +22,7 @@ Route::get('/watch-history', [WatchHistoryController::class, 'index'])->name('hi
 Route::post('/history/add/{id}', [WatchHistoryController::class, 'store'])->name('history.store');
 
 /*
-|--------------------------------------------------------------------------
+|----------------------a----------------------------------------------------
 | Admin Auth & Management Routes (Wajib Login Admin)
 |--------------------------------------------------------------------------
 */

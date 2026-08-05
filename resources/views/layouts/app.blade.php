@@ -24,16 +24,20 @@
     @yield('styles')
 </head>
 <script>
-function openTrailer(url, title, mediaId) {
+function openTrailer(url, media) {
 
-    fetch('/history/add/' + mediaId, {
-        method: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-            'Accept': 'application/json'
-        }
-    }).catch(err => console.error(err));
+    // Simpan ke riwayat jika data media tersedia
+    if (media && media.id) {
+        fetch('/history/add/' + media.id, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'Accept': 'application/json'
+            }
+        }).catch(error => console.error(error));
+    }
 
+    // Buka trailer
     window.open(url, '_blank');
 }
 </script>

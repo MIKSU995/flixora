@@ -38,7 +38,18 @@
                         </a>
                         @if($featuredMedia->trailer_url)
                             <button
-                                onclick="openTrailer('{{ $featuredMedia->trailer_url }}', '{{ $featuredMedia->title }}', {{ $featuredMedia->id }})"
+                                onclick='openTrailer(
+                                "{{ $featuredMedia->trailer_url }}",
+                                {!! json_encode([
+                                "id"=>$featuredMedia->id,
+                                "title"=>$featuredMedia->title,
+                                "slug"=>$featuredMedia->slug,
+                                "poster_url"=>$featuredMedia->poster_url,
+                                "type"=>$featuredMedia->type,
+                                "release_year"=>$featuredMedia->release_year,
+                                "avg_rating"=>$featuredMedia->avg_rating
+                                ]) !!}
+                                )'
                                 class="btn-secondary">
                                 Tonton Trailer
                             </button>

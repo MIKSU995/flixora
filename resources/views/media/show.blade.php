@@ -18,19 +18,25 @@
             {{-- Info --}}
             <div class="media-detail-info">
                 <div class="media-detail-badges">
-                    <span class="badge badge-red">{{ $media->type == 'movie' ? 'FILM' : 'ACARA TV' }}</span>
-                   <span class="badge badge-gold">
-    <span id="avgRatingValue">{{ number_format($media->avg_rating,1) }}</span>
-    /
-    5.0
-    (<span id="totalRatingCount">{{ $media->total_ratings }}</span> ulasan)
-</span>
+    <span class="badge badge-red">
+        {{ $media->type == 'movie' ? 'FILM' : 'ACARA TV' }}
+    </span>
 
-<span class="media-detail-year">
-    {{ $media->release_year }} • {{ $media->duration_or_seasons }}
-</span>
+    <span class="badge badge-gold">
+        <span id="avgRatingValue">{{ number_format($media->avg_rating,1) }}</span>
+        /
+        5.0
+        (<span id="totalRatingCount">{{ $media->total_ratings }}</span> ulasan)
+    </span>
 
-                <h1 class="media-detail-title">{{ $media->title }}</h1>
+    <span class="media-detail-year">
+        {{ $media->release_year }} • {{ $media->duration_or_seasons }}
+    </span>
+</div>
+
+<h1 class="media-detail-title">
+    {{ $media->title }}
+</h1>
 
                 <div class="media-detail-genres">
                     @foreach($media->genres as $g)
